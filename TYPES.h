@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <iostream>
-
 class Person{
 private:
     int age;
@@ -23,15 +22,19 @@ public:
         return name;
     }
 
-    bool operator> (const Person& other){
-        return id > other.id;
+    bool operator> (const Person& other) const{
+        if(id > other.id) return id > other.id;
+        if(age > other.age) return age > other.age;
+        return name > other.name;
     }
 
-    bool operator< (const Person& other){
-        return id < other.id;
+    bool operator< (const Person& other) const{
+        if(id < other.id) return id < other.id;
+        if(age < other.age) return age < other.age;
+        return name < other.name;
     }
 
-    bool operator==(const Person& other){
+    bool operator==(const Person& other) const{
         return id == other.id && age == other.age && name == other.name;
     }
     
@@ -46,9 +49,22 @@ public:
     Student(int age, int id, int money, std::string name): Person(age, id, name), money(money){}
     Student() = default;
 
-    int getMoney(){
+    int getMoney() const{
         return money;
     }
+
+    bool operator<(const Student & other) const{
+        return Person::operator<(other) && money < other.getMoney();
+    }
+
+    bool operator>(const Student & other) const{
+        return Person::operator>(other) && money > other.getMoney();
+    }
+
+    bool operator==(const Student & other) const{
+        return Person::operator==(other) && money == other.getMoney();
+    }
+
     ~Student() = default;
 };
 
@@ -59,8 +75,20 @@ public:
     Teacher(int age, int id, int number, std::string name): Person(age, id, name), numberOfPublications(number){};
     Teacher() = default;
 
-    int getNumberOfPublications(){
+    int getNumberOfPublications() const{
         return numberOfPublications;
+    }
+
+     bool operator<(const Teacher & other) const{
+        return Person::operator<(other) && numberOfPublications < other.getNumberOfPublications();
+    }
+
+    bool operator>(const Teacher & other) const{
+        return Person::operator>(other) && numberOfPublications > other.getNumberOfPublications();
+    }
+
+    bool operator==(const Teacher & other) const{
+        return Person::operator==(other) && numberOfPublications == other.getNumberOfPublications();
     }
 
     ~Teacher() = default;
