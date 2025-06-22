@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 
 class Person{
 private:
@@ -66,7 +67,7 @@ public:
 };
 
 void Print(Person& other){
-    cout <<"Age: " << other.getAge() <<"\n";
-    cout <<"Id: " << other.getId() <<"\n";
-    cout <<"Name: "<<other.getName() <<"\n";
+    std::cout <<"Age: " << other.getAge() <<"\n";
+    std::cout <<"Id: " << other.getId() <<"\n";
+    std::cout <<"Name: "<<other.getName() <<"\n";
 }
